@@ -11,13 +11,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
+
+    private static String accessKey = "mCJCRkiz1BGyzqUwWEsB";
+    private static String userName = "penderfynydd_L7o96p";
+
+    public static String getAccessKey() {
+        return accessKey;
+    }
+
+    public static String getUserName() {
+        return userName;
+    }
+
+
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
-
-        String userName = "penderfynydd_L7o96p";
-        String accessKey = "mCJCRkiz1BGyzqUwWEsB";
 
         mutableCapabilities.setCapability("browserStack.user", userName);
         mutableCapabilities.setCapability("browserStack.key", accessKey);
