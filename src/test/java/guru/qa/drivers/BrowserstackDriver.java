@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import javax.annotation.Nonnull;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
@@ -14,22 +15,27 @@ public class BrowserstackDriver implements WebDriverProvider {
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
-//        mutableCapabilities.merge(capabilities);
 
-        mutableCapabilities.setCapability("browserStack.user", "penderfynydd_L7o96p");
-        mutableCapabilities.setCapability("browserStack.key", "mCJCRkiz1BGyzqUwWEsB");
+        String userName = "penderfynydd_L7o96p";
+        String accessKey = "mCJCRkiz1BGyzqUwWEsB";
 
-        mutableCapabilities.setCapability("app", "");
+        mutableCapabilities.setCapability("browserStack.user", userName);
+        mutableCapabilities.setCapability("browserStack.key", accessKey);
+
+        mutableCapabilities.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
 
         mutableCapabilities.setCapability("device", "Google Pixel 3");
         mutableCapabilities.setCapability("os_version", "9.0");
 
-        mutableCapabilities.setCapability("project", "");
-        mutableCapabilities.setCapability("build", "");
-        mutableCapabilities.setCapability("name", "");
+        mutableCapabilities.setCapability("project", "QA Guru Mobile Project");
+        mutableCapabilities.setCapability("build", "browserstack-build-1");
+        mutableCapabilities.setCapability("name", "sample-test");
 
-        RemoteWebDriver driver = new RemoteWebDriver(
-                new URL("https://link"), mutableCapabilities);
-        return null;
+        try {
+            return new RemoteWebDriver(
+                    new URL(String.format("https://%s:%s@hub.browserstack.com/wd/hub", userName, accessKey)), mutableCapabilities);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
