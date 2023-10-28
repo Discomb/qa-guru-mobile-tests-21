@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'guru.qa'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+def junitVersion = "5.9.3";
+
+dependencies {
+    testImplementation "com.codeborne:selenide:6.19.0"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testImplementation 'io.appium:java-client:8.6.0'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.9'
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
