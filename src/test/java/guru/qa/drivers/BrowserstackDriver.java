@@ -2,6 +2,7 @@ package guru.qa.drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
 import guru.qa.config.AuthConfig;
+import guru.qa.config.MobileConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
@@ -14,6 +15,7 @@ import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
     protected static final AuthConfig authConfig = ConfigFactory.create(AuthConfig.class, System.getProperties());
+    protected static final MobileConfig mobileConfig = ConfigFactory.create(MobileConfig.class, System.getProperties());
 
     @Nonnull
     @Override
@@ -24,10 +26,10 @@ public class BrowserstackDriver implements WebDriverProvider {
         mutableCapabilities.setCapability("browserstack.user", authConfig.getUserName());
         mutableCapabilities.setCapability("browserstack.key", authConfig.getAccessKey());
 
-        mutableCapabilities.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
+        mutableCapabilities.setCapability("app", mobileConfig.getApp());
 
-        mutableCapabilities.setCapability("device", "Google Pixel 3");
-        mutableCapabilities.setCapability("os_version", "9.0");
+        mutableCapabilities.setCapability("device", mobileConfig.getDevice());
+        mutableCapabilities.setCapability("os_version", mobileConfig.getOS());
 
         mutableCapabilities.setCapability("project", "QA Guru Mobile Project");
         mutableCapabilities.setCapability("build", "browserstack-build-1");

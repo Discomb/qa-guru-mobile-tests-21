@@ -1,6 +1,7 @@
 package guru.qa.tests;
 
 import com.codeborne.selenide.CollectionCondition;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -10,7 +11,8 @@ import static com.codeborne.selenide.Selenide.$$;
 import static io.appium.java_client.AppiumBy.accessibilityId;
 import static io.appium.java_client.AppiumBy.id;
 
-public class SearchTests extends TestBase {
+@Tag("android")
+public class AndroidTests extends TestBase {
 
     @Test
     void successfulSearchTest() {
