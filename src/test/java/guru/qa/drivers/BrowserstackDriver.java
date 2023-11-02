@@ -1,6 +1,8 @@
 package guru.qa.drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import guru.qa.config.AuthConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
@@ -11,26 +13,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
-
-    private static String accessKey = "mCJCRkiz1BGyzqUwWEsB";
-    private static String userName = "penderfynydd_L7o96p";
-
-    public static String getAccessKey() {
-        return accessKey;
-    }
-
-    public static String getUserName() {
-        return userName;
-    }
-
+    protected static final AuthConfig authConfig = ConfigFactory.create(AuthConfig.class, System.getProperties());
 
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
+
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
 
-        mutableCapabilities.setCapability("browserstack.user", userName);
-        mutableCapabilities.setCapability("browserstack.key", accessKey);
+        mutableCapabilities.setCapability("browserstack.user", authConfig.getUserName());
+        mutableCapabilities.setCapability("browserstack.key", authConfig.getAccessKey());
 
         mutableCapabilities.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
 
@@ -43,7 +35,7 @@ public class BrowserstackDriver implements WebDriverProvider {
 
         try {
             return new RemoteWebDriver(
-                    new URL("https://hub-cloud.browserstack.com/wd/hub"), mutableCapabilities);
+                    new URL(authConfig.getUrl()), mutableCapabilities);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
