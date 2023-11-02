@@ -7,10 +7,8 @@ import static java.lang.String.format;
 
 public class Browserstack {
 
-//    curl -u "penderfynydd_L7o96p:mCJCRkiz1BGyzqUwWEsB" https://api.browserstack.com/automate/sessions/<session-id>.json
-
     public static String videoUrl(String sessionId) {
-        String url = format("https://api.browserstack.com/automate/sessions/%s.json", sessionId);
+        String url = format("https://api-cloud.browserstack.com/app-automate/sessions/%s.json", sessionId);
 
         return given()
                 .auth().basic(getUserName(), getAccessKey())

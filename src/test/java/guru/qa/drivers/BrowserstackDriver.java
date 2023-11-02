@@ -29,8 +29,8 @@ public class BrowserstackDriver implements WebDriverProvider {
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
 
-        mutableCapabilities.setCapability("browserStack.user", userName);
-        mutableCapabilities.setCapability("browserStack.key", accessKey);
+        mutableCapabilities.setCapability("browserstack.user", userName);
+        mutableCapabilities.setCapability("browserstack.key", accessKey);
 
         mutableCapabilities.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
 
@@ -43,7 +43,7 @@ public class BrowserstackDriver implements WebDriverProvider {
 
         try {
             return new RemoteWebDriver(
-                    new URL(String.format("https://%s:%s@hub.browserstack.com/wd/hub", userName, accessKey)), mutableCapabilities);
+                    new URL("https://hub-cloud.browserstack.com/wd/hub"), mutableCapabilities);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
