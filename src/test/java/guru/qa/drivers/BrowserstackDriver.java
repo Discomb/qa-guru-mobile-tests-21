@@ -41,5 +41,6 @@ public class BrowserstackDriver implements WebDriverProvider {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+
     }
 }
