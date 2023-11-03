@@ -1,7 +1,6 @@
 package guru.qa.tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import guru.qa.drivers.BrowserstackDriver;
 import guru.qa.helpers.Attach;
@@ -31,12 +30,15 @@ public class TestBase {
     @AfterEach
     void afterEach() {
 
+//      todo  Работает только с локальным драйвером
 //        Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
 
-        String sessionId = Selenide.sessionId().toString();
+//      todo Убрать для локал
+//        String sessionId = Selenide.sessionId().toString();
         closeWebDriver();
 
-        Attach.addVideo(sessionId);
+//      todo Убрать для локал
+//        Attach.addVideo(sessionId);
     }
 }
